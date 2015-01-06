@@ -4,8 +4,8 @@ Package.describe({
   git: "https://github.com/fightingtheboss/meteor-scss.git"
 });
 
-Package._transitional_registerBuildPlugin({
-  name: 'fightingtheboss:scss',
+Package.registerBuildPlugin({
+  name: 'compileScss',
   sources: [
     'plugin/compile-scss.js'
   ],
@@ -15,12 +15,12 @@ Package._transitional_registerBuildPlugin({
   }
 });
 
-Package.on_test(function (api) {
+Package.onTest(function (api) {
   api.use(['test-helpers',
            'tinytest',
            'jquery',
            'templating']);
-  api.use(['fightingtheboss:scss']);
+  api.use(['meteor-scss']);
   api.add_files(['test/scss_tests.html', 'test/scss_tests.js'], 'client');
   api.add_files(['test/scss_tests.scss'], 'client',  {isTest:true});
 });
