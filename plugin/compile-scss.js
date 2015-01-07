@@ -8,10 +8,8 @@ var loadJSONFile = function (filePath) {
 
   try {
     return JSON.parse(content);
-  }
-  catch (e) {
+  } catch (e) {
     console.log("Error: failed to parse ", filePath, " as JSON");
-
     return {};
   }
 };
@@ -24,7 +22,7 @@ var sourceHandler = function(compileStep) {
   var optionsFile = path.join(process.cwd(), 'scss.json');
   var scssOptions = {};
 
-  if (fs.existsSync(optionsFile)) {
+  if ( fs.existsSync(optionsFile) ) {
     scssOptions = loadJSONFile(optionsFile);
   }
 
@@ -32,27 +30,27 @@ var sourceHandler = function(compileStep) {
     sourceComments: 'none'
   });
 
-  options.file = compileStep._fullInputPath;
+  options.file = compileStep.fullInputPath;
 
-  if (!_.isArray(options.includePaths)) {
+  if ( !_.isArray(options.includePaths) ) {
     options.includePaths = [options.includePaths];
   }
 
-  options.includePaths = options.includePaths.concat(path.dirname(compileStep._fullInputPath));
+  options.includePaths.push(path.dirname(compileStep.fullInputPath));
 
-  var css;
   try {
-    css = sass.renderSync(options);
+    var css = sass.renderSync(options);
   } catch (e) {
     // less.render() is supposed to report any errors via its
     // callback. But sometimes, it throws them instead. This is
     // probably a bug in less. Be prepared for either behavior.
     compileStep.error({
-      message: "Scss compiler error: " + e.message + "\n" + e,
+      message: e,
       sourcePath: e.filename || compileStep.inputPath,
       line: e.line - 1,  // dunno why, but it matches
       column: e.column + 1
     });
+
     return;
   }
 
