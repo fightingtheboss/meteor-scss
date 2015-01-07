@@ -21,8 +21,6 @@ var sourceHandler = function(compileStep) {
 
   var optionsFile = path.join(process.cwd(), 'scss.json');
   var scssOptions = {};
-  var sourceMap   = null;
-  var future = new Future;
 
   if ( fs.existsSync(optionsFile) ) {
     scssOptions = loadJSONFile(optionsFile);
