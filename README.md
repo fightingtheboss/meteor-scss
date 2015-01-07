@@ -1,4 +1,4 @@
-meteor-sass
+meteor-scss
 ===========
 
 Latest stable node-sass wrapped to work with Meteor.
