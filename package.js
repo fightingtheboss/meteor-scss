@@ -1,5 +1,5 @@
 Package.describe({
-  summary: 'Style with attitude.',
+  summary: 'Latest stable node-sass wrapped to work with Meteor.',
   version: "1.1.4",
   git: "https://github.com/fightingtheboss/meteor-scss.git"
 });
